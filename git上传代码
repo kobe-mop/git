@@ -1,0 +1,38 @@
+#查看git版本
+git --version 
+
+#git连接github
+ssh-keygen -t rsa -C "kobe-mop@qq.com"
+vi /c/Users/Administrator/.ssh/id_rsa.pub
+
+#查看是否连接成功
+ssh git@github.com
+
+#配置
+git config --global user.name asb
+git config --global user.email kobe-mop@qq.com
+git config --global user.ui True
+
+#查看配置
+git config --list
+cd ~
+vi .gitconfig
+
+#创建repository
+mkdir Demo
+cd Demo/
+git init
+
+#创建文件
+touch README
+git status  #查看状态（工作区）
+
+git add README
+git status  #（缓冲区）
+
+git commit -m 'first commit'
+git status  #（远程服务器）
+
+git remote add origin git@github.com:kobe-mop/Demo.git
+git push -u origin master
+
