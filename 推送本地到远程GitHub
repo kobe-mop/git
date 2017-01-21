@@ -1,5 +1,5 @@
 1.登录
-ssh git@github.com    #记住密码是123456
+ssh git@github.com    #记住登录密码是123456
 
 2.创建repository
 mkdir Demo
@@ -20,7 +20,7 @@ git status  #（远程服务器）
 
 6.推送到GitHub
 git remote add origin git@github.com:kobe-mop/Demo.git
-git push -u origin master
+git push -u origin master #此时提示要输入用户名 kobe-mop 以及 GitHub网页的登录密码
 
 ****************************************************************
 
