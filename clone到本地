@@ -1,13 +1,5 @@
 1.登录
 ssh git@github.com      #密码123456
 
-2.新建本地目录
-cd f:
-cd myproject/
-mkdir repository
-
-3.初始化
-git init
-
-4.clone开始
+2.clone开始
 git clone https://github.com/kobe-mop/Java.git
