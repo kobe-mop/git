@@ -17,38 +17,3 @@ git config --global user.ui True
 git config --list
 cd ~
 vi .gitconfig
-
-/***从这里开始代码上传的步骤 ***/
-
-#创建repository
-mkdir Demo
-cd Demo/
-git init
-
-#创建文件
-touch README
-git status  #查看状态（工作区）
-
-git add README
-git status  #（缓冲区）
-
-git commit -m 'first commit'
-git status  #（远程服务器）
-
-git remote add origin git@github.com:kobe-mop/Demo.git
-git push -u origin master
-
-/***
-如果输入 git remote add origin  https://github.com/(user_name)/(app_name).git
-    提示出错信息：fatal: remote origin already exists.
-解决：git remote rm origin
-***/
-
-
-/***
-如果输入 git push -u origin master
-     提示出错信息：! [rejected]        master -> master (non-fast-forward)
-解决：git pull --rebase origin master
-***/
-
-
