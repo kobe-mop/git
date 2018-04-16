@@ -1,0 +1,68 @@
+前面说了，如果你手滑删掉了一个文件，可以用 Git 帮你找回来。同样，如果一个文件被你改来改去面目全非，直到程序无法运行，你累感不爱想要回到开始的状态，Git 也可以帮你轻松搞定。
+
+我们现在直接把 readme.txt 从文件夹中删除。看一下状态：
+
+# On branch master
+# Changes not staged for commit:
+#   (use "git add/rm <file>..." to update what will be committed)
+#   (use "git checkout -- <file>..." to discard changes in working directory)
+#
+#	deleted:    readme.txt
+#
+no changes added to commit (use "git add" and/or "git commit -a")
+
+注意其中有一句提示：
+use "git checkout -- <file>..." to discard changes in working directory
+
+用 git checkout -- <file> 命令舍弃工作目录中的修改。注意 checkout 后面的 --，没有这两个减号就是另一条命令了，后面关于分支的时候会去说它。
+
+那我们就来试一下：
+
+git checkout -- readme.txt
+
+看看文件夹中，消失的文件是不是又回来了？再看下 git status，也回到了没有产生修改的状态。
+
+那么，如果一个修改后的文件已经被暂存了，要如何恢复到之前的状态呢？
+
+我们来改一下 readme.txt，在文件中加点字，然后 git add 添加到暂存区。查看状态：
+
+# On branch master
+# Changes to be committed:
+#   (use "git reset HEAD <file>..." to unstage)
+#
+#	modified:   readme.txt
+#
+
+这里 Git 又给出提示了：
+use "git reset HEAD <file>..." to unstage
+
+用 git reset HEAD <file> 命令撤销暂存。
+
+git reset HEAD readme.txt
+
+这条命令并不会更改 readme.txt 里的内容，修改仍然存在，但是文件的状态变回到已修改。
+
+# On branch master
+# Changes not staged for commit:
+#   (use "git add <file>..." to update what will be committed)
+#   (use "git checkout -- <file>..." to discard changes in working directory)
+#
+#	modified:   readme.txt
+#
+no changes added to commit (use "git add" and/or "git commit -a")
+
+你可以修改了重新暂存，也可以用前面的方法把文件恢复。
+
+再进一步，如果文件修改已经被 commit 了，要如何撤销？
+
+一种情况是，你提交了之后发现还漏了几个地方没有改，或者提交的文件中有些小错误，想要撤销回来重新提交。那么你可以用 git commit --amend 来重新提交。
+
+做完修改、暂存之后，运行
+
+git commit --amend
+
+会开启文本编辑器让你修改上次的提交注释，或者通过 -m 参数直接指定。保存退出后，这一次的改动就会被直接加上上一次的提交里，不会产生新的 commit。
+
+你也许觉得，直接再提交一次不就好了。但难免有时候不想因为笔误产生过多提交。再说，程序员调试代码的时候总会有些恶趣味，诸如 print 'believe spring brother' 之类的调试语句，如果最后忘了删干净就提交了，肯定不想再做一次提交去删除。还是直接神不知鬼不觉地清理掉比较好。
+
+还有另一种情况，就是整个上一次的提交你都不想要了，希望回退到上一个提交状态。这时候就需要用到版本回退了。
