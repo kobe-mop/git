@@ -1,0 +1,65 @@
+昨天关于 PyCon 的介绍里有个小bug，北京场是14日，和其他分会场不是同一天。特此更正，北京的小伙伴们请注意。
+
+另外，今天介绍一个很有爱的公众账号：步步学画（bubuxuehua），教你简单几笔就画出小黄人、机器猫、轻松熊、草泥马……是我的一个学妹运营的公众号（码农群体也是多才多艺的！）喜欢画画或者家里有小孩子的朋友推荐关注。
+
+----------------
+
+上次说到，如果你已经提交了代码，但是又后悔了，想要放弃这次的改动，回到之前的版本。这时候就需要做版本回退。
+
+我们先在工作目录中运行 git log 命令，看看到目前为止的提交记录：
+
+commit 81e34d1d269b13bb23619d828495119492eabc5a
+Author: Crossin 
+Date:   Thu Nov 28 17:27:34 2013 +0800
+
+    remove file
+
+commit 1edcbf15f45359768b3fa9cd99ddddde792912fe
+Author: Crossin 
+Date:   Thu Nov 28 15:16:37 2013 +0800
+
+    add file to be deleted
+
+commit 15547cb5e6bb661a4b9934c1ea55fe0aeceb0682
+Author: Crossin 
+Date:   Tue Nov 26 14:39:06 2013 +0800
+
+    test file status
+
+commit c1310cffd37c4b7fe765986035e54a3c27c2887f
+Author: Crossin 
+Date:   Tue Nov 26 14:11:46 2013 +0800
+
+    init readme
+
+也许你的提交历史和我不一样，这没关系。
+
+还记得我们前面课里说过的 HEAD，它指向的是最新的提交。而上一次的提交就是 HEAD^，上上次是 HEAD^^，也可以写成 HEAD~2，以此类推。之前30次版本就是 HEAD~30，或者你愿意也可以打30个^。
+
+要回退上一个版本，只要：
+
+git reset --hard HEAD^
+
+--hard 表示放弃所有的本地改动，其他的可选模式我们先不管。
+
+输出提示：
+HEAD is now at 1edcbf1 add file to be deleted
+
+HEAD 已经被移动回“add file to be deleted”这个版本。
+
+如果想要移动到某个指定的提交，也可以直接使用提交id，就是 git log 里，commit 后面的一串字符（你的版本中的提交 id 和我是不一样的）。
+
+git reset --hard 15547
+
+id 不用输全，前几位就够，git 会自动去找匹配的提交。然后就可以看到：
+
+HEAD is now at 15547cb test file status
+
+
+顺便说一下，你可以使用 git 里自带的图形化客户端 gitk 来查看和管理版本变动。在命令行里输入 gitk，mac 上是 gitx，就可以打开（如果不幸没有打开，可能你需要另行安装以下）。
+
+回退前：
+
+回退后：
+
+注意，当用 git reset --hard 回退版本后，所有的本地未提交改动将被舍弃，而被回退掉的版本也不再出现在记录里（虽然还是可以被找回来）。所以在使用此操作时请慎重考虑。
