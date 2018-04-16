@@ -1,0 +1,46 @@
+之前讲了很多课，都是在本地仓库里进行操作。而 Git 的作用一方面在于对文件进行版本控制，更重要的是便于多人协作开发。因此只有本地仓库的 Git 算不上真正的 Git。而 GitHub 就是创建远程仓库的好地方。
+
+通过 git remote 命令可以查看当期有哪些远程仓库。
+
+还记得我最开始安装成功后从 GitHub 上 clone 下的那个项目吗？在它的工作目录中输入：
+
+git remote
+
+你会看到显示：
+
+origin
+
+这就是这个项目的远程仓库。
+
+加上 -v 可以看到更详细的信息：
+
+origin	git@github.com:crossin/CrossinClass.git (fetch)
+origin	git@github.com:crossin/CrossinClass.git (push)
+
+克隆的源地址也被显示出来。
+
+当你是从远程仓库 clone 一个仓库到本地时，会自动将此地址加到你的远程仓库列表中，并命名为 origin。
+
+而如果是一个在本地 git init 创建的仓库，刚开始时 git remote 是看不到任何信息的，因为它没有添加任何远程仓库。
+
+想要添加一个远程仓库，可以用命令：
+
+git remote add [shortname] [url]
+
+比如：
+
+git remote add myremote git@github.com:crossin/CrossinClass.git
+
+这样，在这个项目中就能 myremote 这个名字来引用添加的远程仓库。
+
+运行一下 git remote，看看是不是已经出现在了列表中。
+
+但此时此刻，你的工作目录下的文件并没有发生任何变化。只是相当于，你拿到了一个箱子的钥匙，而箱子里的东西还原封未动。对于远程仓库的操作，后面还有很多等待我们去折腾的。
+
+现在可以去 GitHub 注册个号，然后建一个自己的项目，clone 到本地。因为别人的项目是没有权限进行写操作的。接下来我们很快就会用到它。
+
+假如你要删除某个仓库，就使用 git remote rm 命令：
+
+git remote rm myremote
+
+就可以把 myremote 这个远程仓库从列表中清除了。
