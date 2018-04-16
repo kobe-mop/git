@@ -1,4 +1,4 @@
-上次安装了 Git 之后，我让大家用命令：
+安装了 Git 之后，大家用命令：
 
 git clone https://github.com/crossin/CrossinClass.git
 
